@@ -39,3 +39,11 @@ CREATE TABLE club_member_info_cleaned (
 
 Insert Into club_member_info_cleaned
 Select * From club_member_info;
+
+#### Convert Upper letter for full name
+
+UPDATE club_member_info_cleaned SET full_name = UPPER(full_name); 
+
+#### TRIM double space for full name
+
+UPDATE club_member_info_cleaned SET full_name = TRIM(full_name);
