@@ -47,3 +47,29 @@ UPDATE club_member_info_cleaned SET full_name = UPPER(full_name);
 #### TRIM double space for full name
 
 UPDATE club_member_info_cleaned SET full_name = TRIM(full_name);
+
+#### Replace NULL or Incorrect value from age column with popular value
+
+#### 1. Find popular value:
+
+SELECT mode(age) from club_member_info_cleaned cmic ;
+
+#### 2. Replace value
+
+UPDATE club_member_info_cleaned SET age = mode(age) WHERE age ISNULL OR age >=200;
+
+#### Replace NULL value from martial_status column with "NONE"
+
+UPDATE club_member_info_cleaned SET martial_status ="NONE" WHERE martial_status ="";
+
+#### Replace NULL or Incorrect value from phone column with "000-000-0000"
+
+#### 1. Find NULL or Incorrect value
+
+SELECT * FROM club_member_info_cleaned cmic WHERE phone NOT LIKE '___-___-____';
+
+#### 2. Replace value
+
+UPDATE club_member_info_cleaned  SET phone = "000-000-0000" WHERE phone NOT LIKE '___-___-____';
+
+
